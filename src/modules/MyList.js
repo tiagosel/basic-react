@@ -1,53 +1,66 @@
-import React from 'react';
+import React from "react";
 //import { render } from 'react-dom'
+import Events from "events";
 
-export class MyListItem extends React.Component{
-    state = {
-        totalClicks: 0
-    }
+var Channel = new Events.EventEmitter();
 
-    click = ()=>{
-        var totalClicks = ++this.state.totalClicks;
-        this.setState({totalClicks});
-        this.props.onClick && this.props.onClick();
-    }
+export class MyListItem extends React.Component {
+  state = {
+    totalClicks: 0
+  };
 
-    render(){
-        var props = this.props,
-            state = this.state,
-            style = {"color" : props.color};
-        return(
-            <li onClick={this.click} style={style} >{props.text}  - {state.totalClicks}</li>
-        )
-    }
+  click = () => {
+    var totalClicks = ++this.state.totalClicks;
+    this.setState({ totalClicks });
+    //this.props.onClick && this.props.onClick();
+    Channel.emit("listItem:clickc");
+  };
+
+  render() {
+    var props = this.props,
+      state = this.state,
+      style = { color: props.color };
+    return (
+      <li onClick={this.click} style={style}>
+        {props.text} - {state.totalClicks}
+      </li>
+    );
+  }
 }
 
-export class MyList extends React.Component{
-    state = {
-        totalClicks: 0
-    }
+export class MyList extends React.Component {
+  state = {
+    totalClicks: 0
+  };
 
-    childClick = ()=>{
-        var totalClicks = ++this.state.totalClicks;
-        this.setState({totalClicks});
-    }
+  componentDidMount = () => {
+    Channel.on("listItem:click", this.childClick);
+  };
 
-    render(){
-        var props = this.props,
-              state = this.state;
+  componentWillUnmount = () => {
+    Channel.removeListener("listItem:click", this.childClick);
+  };
+  childClick = () => {
+    var totalClicks = ++this.state.totalClicks;
+    this.setState({ totalClicks });
+  };
 
-        return (
-            <div>
-                <h3>Total de Itens: {props.children.length}</h3>
-                <h3>Total de Cliques: {state.totalClicks}</h3>
-                <ul>
-                   {
-                        this.props.children.map((child, index)=>{
-                            return <MyListItem onClick={this.childClick.bind(this)} color="red" text={child.props.children} key={index}  />
-                        })
-                    }
-                </ul>
-            </div>
-        );
-    }
+  render() {
+    var props = this.props,
+      state = this.state;
+
+    return (
+      <div>
+        <h3>Total de Itens: {props.children.length}</h3>
+        <h3>Total de Cliques: {state.totalClicks}</h3>
+        <ul>
+          {this.props.children.map((child, index) => {
+            return (
+              <MyListItem color="red" text={child.props.children} key={index} />
+            );
+          })}
+        </ul>
+      </div>
+    );
+  }
 }
