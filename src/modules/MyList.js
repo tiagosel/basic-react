@@ -13,7 +13,7 @@ export class MyListItem extends React.Component {
     var totalClicks = ++this.state.totalClicks;
     this.setState({ totalClicks });
     //this.props.onClick && this.props.onClick();
-    Channel.emit("listItem:clickc");
+    Channel.emit("listItem:click");
   };
 
   render() {
