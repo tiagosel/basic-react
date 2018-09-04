@@ -1,8 +1,8 @@
-import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
-import TextCounter from './modules/TextCounter';
-import {MyListItem,MyList} from './modules/MyList';
+import React, { Component } from "react";
+import logo from "./logo.svg";
+import "./App.css";
+import TextCounter from "./modules/TextCounter";
+import { MyListItem, MyList } from "./modules/MyList";
 class App extends Component {
   render() {
     return (
@@ -14,12 +14,9 @@ class App extends Component {
         <p className="App-intro">
           To get started, edit <code>src/App.js</code> and save to reload.
         </p>
-        <TextCounter lable='Count char'/>
-        <br/>
-        <MyList>
-            <span>ABC</span>
-            <span>DEF</span>
-        </MyList>
+        <TextCounter lable="Count char" />
+        <br />
+        <MyList />
       </div>
     );
   }
