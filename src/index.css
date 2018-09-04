@@ -3,3 +3,26 @@ body {
   padding: 0;
   font-family: sans-serif;
 }
+.myList-enter {
+  opacity: 0.01;
+  position: relative;
+  left: 20px;
+}
+
+.myList-enter.myList-enter-active {
+  opacity: 1;
+  left: 0;
+  transition: all 500ms ease-in;
+}
+
+.myList-leave {
+  opacity: 1;
+  position: relative;
+  left: 0;
+}
+
+.myList-leave.myList-leave-active {
+  opacity: 0.01;
+  left: 20px;
+  transition: all 300ms ease-in;
+}
