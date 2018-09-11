@@ -1,22 +1,27 @@
 import React, { Component } from "react";
-import logo from "./logo.svg";
-import "./App.css";
-import TextCounter from "./modules/TextCounter";
-import { MyListItem, MyList } from "./modules/MyList";
+import { render } from "react-dom";
+import { Link } from "react-router-dom";
+
 class App extends Component {
   render() {
     return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h1 className="App-title">Welcome to React</h1>
-        </header>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
-        <TextCounter lable="Count char" />
-        <br />
-        <MyList />
+      <div>
+        <header>App</header>
+        <menu>
+          <ul>
+            <li>
+              <Link to="/">Home</Link>
+            </li>
+            <li>
+              <li>
+                <Link to="/about/abc">About 1</Link>
+              </li>
+              <li>
+                <Link to="/about/def">About 2</Link>
+              </li>
+            </li>
+          </ul>
+        </menu>
       </div>
     );
   }

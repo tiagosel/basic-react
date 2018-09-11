@@ -1,8 +1,19 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
-import registerServiceWorker from './registerServiceWorker';
+import React from "react";
+import ReactDOM from "react-dom";
+import { BrowserRouter as Router, Route } from "react-router-dom";
 
-ReactDOM.render(<App />, document.getElementById('root'));
-registerServiceWorker();
+import App from "./App";
+import Home from "./Home";
+import About from "./About";
+
+ReactDOM.render(
+  <Router>
+    <div>
+      <App />
+
+      <Route exact path="/" component={Home} />
+      <Route path="/about/:minhaVariavel" component={About} />
+    </div>
+  </Router>,
+  document.getElementById("root")
+);
